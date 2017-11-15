@@ -1,10 +1,11 @@
-import React from ('react');
-import ReactDOM from ('ReactDom');
+// import React from 'react';
 
-class App extends React.component{
-  constructor(props) {
-    super(props);
-  }
-}
+// import ReactDOM from 'react-dom';
 
-ReactDOM.render(<App />, document.getElementById('app'));
+// class App extends React.component {
+//   constructor(props) {
+//     super(props);
+//   }
+// }
+
+// ReactDOM.render(<App />, document.getElementById('app'));
