@@ -10,6 +10,7 @@ User table:
 Users_Events table
   username
   event id (string)
+  date
 
 Match table
   user1
@@ -147,7 +148,7 @@ picture: 'https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAKuAAAAJ
 // Carrie Zhang
 {
 name: 'Carrie Zhang',
-username: 'theCarry',
+username: 'soreshoulders',
 password: 'cookies',
 bio: 'I like cookies.  Feed me cookies',
 picture: 'https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAKuAAAAJDQxMDgwYWYwLTdjZmEtNDkwMy04NDAzLTU0MDQ2N2I1YTA4ZA.jpg'
