@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Home from './Home';
 import SignupPage from './SignupPage';
+
 // import Schedule from './Schedule'
 
 // The Main component renders one of the three provided
@@ -15,6 +16,7 @@ const Main = () => (
       <Route exact path="/" component={Home} />
       <Route path="/signup" component={SignupPage} />
       {/* <Route path='/schedule' component={Schedule}/> */}
+
     </Switch>
   </main>
 );
