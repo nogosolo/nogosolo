@@ -9,4 +9,5 @@ const EventList = (props) => (
 	</div>
 )
 
+
 export default EventList;
