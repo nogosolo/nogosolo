@@ -20,7 +20,7 @@ class SignUpPage extends React.Component {
     if (this.state.password === this.state.confirmPassword) {
       alert('Your Passwords don\'t Match!');
     } else {
-      console.log(this.state)
+      console.log(this.state);
     // AJAX POST REQUEST GOES HERE
     }
   }

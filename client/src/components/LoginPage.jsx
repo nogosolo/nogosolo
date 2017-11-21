@@ -39,7 +39,7 @@ class LoginPage extends React.Component {
       <div className="modal">
         <form className="modal-content animate" >
           <div className="imgcontainer">
-            <img src="http://lorempixel.com/1000/1000" alt="Avatar" className="avatar" />
+            <img src="https://i.pinimg.com/originals/24/99/03/249903173ee16b3346ba320a24e56a8b.jpg" alt="Avatar" className="avatar" />
           </div>
           <div className="container">
             <b>Username</b>
