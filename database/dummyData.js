@@ -102,7 +102,7 @@ picture: 'https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAKuAAAAJ
 
 // Andy Nguyen
 {
-name: 'Allen Price',
+name: 'Andy Nguyen',
 username: 'keyboardmaster',
 password: 'qwertydvorak',
 bio: 'I am the termial wizard that makes your computer work',
@@ -175,7 +175,7 @@ picture: 'https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAKuAAAAJ
 // Jaqueline Leung
 {
 name: 'Jaqueline Leung',
-username: 'oghipster',
+username: 'wetsocks',
 password: 'ohshit',
 bio: 'Oh shit',
 picture: 'https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAKuAAAAJDQxMDgwYWYwLTdjZmEtNDkwMy04NDAzLTU0MDQ2N2I1YTA4ZA.jpg'
@@ -274,9 +274,9 @@ picture: 'https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAKuAAAAJ
 // Rithnarin Kong
 {
 name: 'Rithnarin Kong',
-username: 'rith',
+username: 'evilspirit',
 password: 'poetry',
-bio: 'Soccer is life',
+bio: 'Shakespeare inspires me',
 picture: 'https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAKuAAAAJDQxMDgwYWYwLTdjZmEtNDkwMy04NDAzLTU0MDQ2N2I1YTA4ZA.jpg'
 }
 
