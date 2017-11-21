@@ -1,4 +1,4 @@
-var pg = require('pg');
+const pg = require('pg');
 
 // var connection = mysql.createConnection({
 //   host     : 'localhost',
@@ -7,25 +7,30 @@ var pg = require('pg');
 //   database : 'test'
 // });
 
-var connection = pg.createConnection({
-  host: 'localhost',
-  user: 'root',
-  database: 'nogosolo'
-});
+const conString = 'postgres://nogosolo@localhost:8080/nogosolo';
 
-var authenticateUser = function(callback) {
-  connection.query('SELECT * FROM users', function(err, results, fields) {
+const client = new pg.Client(conString);
+client.connect();
+
+// const connection = pg.createConnection({
+//   host: 'localhost',
+//   user: 'root',
+//   database: 'nogosolo'
+// });
+
+const authenticateUser = function (callback) {
+  client.query('SELECT * FROM users', (err, results, fields) => {
     if (err) {
       callback(err, null);
     } else {
       callback(null, results);
     }
-  })
-}
+  });
+};
 
-var selectAll = function(callback) {
-  connection.query('SELECT * FROM items', function(err, results, fields) {
-    if(err) {
+const selectAll = function (callback) {
+  client.query('SELECT * FROM items', (err, results, fields) => {
+    if (err) {
       callback(err, null);
     } else {
       callback(null, results);
