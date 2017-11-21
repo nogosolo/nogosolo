@@ -14,8 +14,7 @@ const configObj = {
   host: 'localhost',
   port: 8080,
   database: 'nogosolo',
-  user: 'ngs',
-  password: 'bccw',
+  user: 'nogosolo',
 };
 
 const db = pgp(configObj);
