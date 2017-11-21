@@ -18,18 +18,18 @@ client.connect();
 //   database: 'nogosolo'
 // });
 
-const authenticateUser = function (callback) {
-  client.query('SELECT * FROM users', (err, results, fields) => {
-    if (err) {
-      callback(err, null);
-    } else {
-      callback(null, results);
-    }
-  });
-};
+// const authenticateUser = function (callback) {
+//   client.query('SELECT * FROM users', (err, results, fields) => {
+//     if (err) {
+//       callback(err, null);
+//     } else {
+//       callback(null, results);
+//     }
+//   });
+// };
 
-const selectAll = function (callback) {
-  client.query('SELECT * FROM items', (err, results, fields) => {
+const selectAllUsers = function (callback) {
+  client.query('SELECT * FROM users', (err, results, fields) => {
     if (err) {
       callback(err, null);
     } else {
