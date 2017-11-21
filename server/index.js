@@ -39,7 +39,6 @@ app.post('/dummyData', (req, res) => {
 
 // });
 
-
 function initialDBPopulation() {
   dummyData.dummyData.forEach((entry) => {
     db.query(`INSERT INTO users (name, username, password, bio, picture)
@@ -60,6 +59,8 @@ db.query('select * from users')
     }
   });
 
-app.listen(process.env.PORT || 8080, () => {
+var host = '0.0.0.0';
+
+app.listen(process.env.PORT || 8080, host, () => {
   console.log('listening on port 8080');
 });
