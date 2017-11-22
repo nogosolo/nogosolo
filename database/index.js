@@ -50,4 +50,5 @@ const selectAllUsers = function (callback) {
 };
 
 module.exports.selectAll = selectAllUsers;
-module.exports.authenticateUser = authenticateUser;
+// module.exports.authenticateUser = authenticateUser;
+module.exports.db = db;
