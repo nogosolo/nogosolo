@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const dummyData = require('../database/dummyData.js');
+const { dummyData } = require('../database/dummyData.js');
 const { db } = require('../database/index.js');
 
 const app = express();
@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
 });
 
 function initialDBPopulation() {
-  dummyData.dummyData.forEach((entry) => {
+  dummyData.forEach((entry) => {
     db.query(`INSERT INTO users (name, username, password, bio, picture)
     VALUES ('${entry.name}', '${entry.username}', '${entry.password}', '${entry.bio}', '${entry.picture}')`)
       .then(() => {
