@@ -4,7 +4,7 @@
   "description": "NoGoSolo",
   "main": "index.js",
   "engines": {
-    "node": "6.11.5"
+    "node": "^6.11.5"
   },
   "scripts": {
     "react-dev": "webpack -d --watch",
