@@ -1,4 +1,7 @@
-const pg = require('pg');
+const pgp = require('pg-promise')();
+
+//  use this command to start postgress in terminal:
+//  pg_ctl -D /usr/local/var/postgres start
 
 // var connection = mysql.createConnection({
 //   host     : 'localhost',
@@ -7,10 +10,17 @@ const pg = require('pg');
 //   database : 'test'
 // });
 
-const conString = 'postgres://nogosolo@localhost:8080/nogosolo';
+const configObj = {
+  host: 'localhost',
+  database: 'nogosolo',
+  user: 'nogosolo',
+};
 
-const client = new pg.Client(conString);
-client.connect();
+const db = pgp(configObj);
+// const conString = 'postgres://nogosolo@localhost:8080/nogosolo';
+
+// const client = new pg.Client(conString);
+// client.connect();
 
 // const connection = pg.createConnection({
 //   host: 'localhost',
@@ -29,7 +39,7 @@ client.connect();
 // };
 
 const selectAllUsers = function (callback) {
-  client.query('SELECT * FROM users', (err, results, fields) => {
+  db.query('SELECT * FROM users', (err, results, fields) => {
     if (err) {
       callback(err, null);
     } else {
@@ -38,5 +48,6 @@ const selectAllUsers = function (callback) {
   });
 };
 
-module.exports.selectAll = selectAll;
-module.exports.authenticateUser = authenticateUser;
+module.exports.selectAll = selectAllUsers;
+// module.exports.authenticateUser = authenticateUser;
+module.exports.db = db;
