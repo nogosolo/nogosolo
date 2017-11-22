@@ -18,6 +18,7 @@ class MatchPage extends React.Component {
         <Slider images={this.state.pictures} isInfinite delay={5000}>
           {images.map((image, key) => <div key={key}><img src={image} /></div>)}
         </Slider>
+        <button onClick={}>Match</button>
         Name: <li>{this.state.username}</li>
         Event: <li>{this.state.event}</li>
         Bio: <li>{this.state.bio}</li>
