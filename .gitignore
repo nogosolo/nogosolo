@@ -38,5 +38,4 @@ Thumbs.db
 
 node_modules
 config.js
-bundle.js
 .env
