@@ -12,7 +12,6 @@ const pgp = require('pg-promise')();
 
 const configObj = {
   host: 'localhost',
-  port: 8080,
   database: 'nogosolo',
   user: 'nogosolo',
 };
