@@ -87,6 +87,7 @@ app.post('/signup', (req, res) => {
     });
 });
 
+<<<<<<< HEAD
 
 function addPotentialMatchInit(userid, eventid) { // temporary to populate database
   db.query(`SELECT * FROM user_event
@@ -113,6 +114,11 @@ function addPotentialMatchInit(userid, eventid) { // temporary to populate datab
       console.log('THIS IS AN ERROR', err);
     });
 }
+=======
+app.post('/login', (req, res) => {
+  console.log('req', req.body);
+});
+>>>>>>> ajax for login started
 
 function initialDBPopulation() {
   dummyData.forEach((entry) => {

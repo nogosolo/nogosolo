@@ -1,6 +1,7 @@
 import React from 'react';
 import enhanceWithClickOutside from 'react-click-outside';
 import { Link } from 'react-router-dom';
+import $ from 'jquery';
 
 
 class LoginPage extends React.Component {
@@ -20,8 +21,22 @@ class LoginPage extends React.Component {
   }
 
   clickHandler(event) {
-    const currentState = this.state.active;
-    this.setState({ active: !currentState });
+    event.preventDefault();
+    var context = this;
+    $.ajax({
+      url: '/login',
+      method: 'POST',
+      success: (data) => {
+
+      },
+      data: {
+        username: context.state.username,
+        password: context.state.password,
+      }
+
+    })
+    //  const currentState = this.state.active;
+    //  this.setState({ active: !currentState });
   }
 
   handleSignin() {
@@ -58,7 +73,7 @@ class LoginPage extends React.Component {
               name="psw"
               required
             />
-            <button type="submit">Login</button>
+            <button type="submit" onClick={this.clickHandler}>Login</button>
           </div>
           <div className="container" style={{ backgroundColor: '#f1f1f1' }}>
             <button

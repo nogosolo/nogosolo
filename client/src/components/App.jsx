@@ -11,6 +11,7 @@ class App extends React.Component {
     this.state = {
       showLogin: false,
       searchQuery: '',
+      userName: '',
     };
   }
 
@@ -28,7 +29,7 @@ class App extends React.Component {
     return (
       <div>
         <SiteNavBar triggerLogin={this.toggleLogin} searchHandler={this.searchHandler} />
-        <Main searchQuery={this.state.searchQuery} />
+        <Main searchQuery={this.state.searchQuery} userName={this.state.username}/>
         {this.state.showLogin && (<LoginPage triggerLogin={this.toggleLogin} />)}
       </div>
     );
