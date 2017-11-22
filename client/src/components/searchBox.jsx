@@ -1,50 +1,34 @@
 import React from 'react';
-import $ from 'jquery';
-import apiKey from '../../../config';
+import { Link } from 'react-router-dom';
 
-
-class Search extends React.Component {
+class SearchBox extends React.Component {
   constructor(props) {
     super(props);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleClick = this.handleClick.bind(this);
+    this.changeHandler = this.changeHandler.bind(this);
+    this.clickHandler = this.clickHandler.bind(this);
     this.state = {
       keyword: '',
-      results: [],
     };
   }
 
-  handleChange(e) {
+  changeHandler(event) {
     this.setState({
-      keyword: e.target.value,
+      keyword: event.target.value,
     });
   }
 
-  handleClick() {
-    $.ajax({
-      type: 'GET',
-      datatype: 'json',
-      url: `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${apiKey}&keyword=${this.state.keyword}`,
-      success: (data) => {
-        const eventNames = data._embedded.events.map(event => event.name);
-        this.setState({
-          results: eventNames,
-        });
-      },
-    });
+  clickHandler() {
+    this.props.searchHandler(this.state.keyword);
   }
 
   render() {
     return (
       <div>
-        <input type="text" value={this.state.keyword} onChange={this.handleChange} />
-        <button onClick={this.handleClick}>search</button>
-        <h3>Search Results for: {this.state.keyword} </h3>
-        There Are {this.state.results.length} event results.
-        {this.state.results.map((eventNames) => { return <li>{eventNames}</li>; })}
+        <input type="text" value={this.state.keyword} onChange={this.changeHandler} />
+        <Link onClick={this.clickHandler} to="/search">Search</Link>
       </div>
     );
   }
 }
 
-export default Search;
+export default SearchBox;
