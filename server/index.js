@@ -15,6 +15,18 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // app.post('/', (req, res) => {
 
+app.get('/match/:username', (req, res) => {
+  // console.log(req.body);
+  const query = `SELECT * FROM users
+  WHERE username = '${req.url.split('/')[2]}'`;
+  db.query(query)
+    .then((data) => {
+      res.json(data[0]);
+    })
+    .catch((err) => {
+      console.log('THIS IS AN ERROR', err);
+    });
+});
 
 app.post('/signup', (req, res) => {
   const userEntry = req.body;
