@@ -19,6 +19,7 @@
 *.rar
 *.tar
 *.zip
+*.env
 
 # Logs and databases #
 ######################
@@ -37,4 +38,4 @@ Thumbs.db
 
 node_modules
 config.js
-bundle.js
+.env
