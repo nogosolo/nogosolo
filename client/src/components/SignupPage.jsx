@@ -1,4 +1,5 @@
 import React from 'react';
+import $ from 'jquery';
 
 class SignUpPage extends React.Component {
   constructor(props) {
@@ -17,11 +18,25 @@ class SignUpPage extends React.Component {
 
 
   clickHandler(event) {
-    if (this.state.password === this.state.confirmPassword) {
+    event.preventDefault();
+    if (this.state.password !== this.state.confirmPassword) {
       alert('Your Passwords don\'t Match!');
     } else {
-      console.log(this.state);
-    // AJAX POST REQUEST GOES HERE
+      $.ajax({
+        type: 'POST',
+        url: '/signup',
+        data: this.state,
+        success: (resp) => {
+          if (resp === 'Username is already taken!') {
+            alert('This Username is already taken!');
+          } else {
+            console.log(resp);
+          }
+        },
+        error: (resp) => {
+          console.log(resp);
+        },
+      });
     }
   }
 
@@ -37,17 +52,39 @@ class SignUpPage extends React.Component {
         <form>
           {/* <div className="container"> */}
           <b>Name</b>
-          <input id="name" type="text" placeholder="Enter Your Name" name="username" required />
+          <input
+            id="name"
+            onChange={this.changeHandler}
+            type="text"
+            placeholder="Enter Your Name"
+            name="username"
+            required
+          />
 
           <b>Username</b>
-          <input id="username" type="text" placeholder="Enter Username" name="username" required />
+          <input
+            id="username"
+            onChange={this.changeHandler}
+            type="text"
+            placeholder="Enter Username"
+            name="username"
+            required
+          />
 
           <b>Password</b>
-          <input id="password" type="password" placeholder="Enter Password" name="psw" required />
+          <input
+            id="password"
+            onChange={this.changeHandler}
+            type="password"
+            placeholder="Enter Password"
+            name="psw"
+            required
+          />
 
           <b>Repeat Password</b>
           <input
             id="confirmPassword"
+            onChange={this.changeHandler}
             type="password"
             placeholder="RepeatPassword"
             name="psw-repeat"
@@ -55,11 +92,19 @@ class SignUpPage extends React.Component {
           />
 
           <b> Profile Picture Url</b>
-          <input id="picture" type="text" placeholder="Enter Picture Url" name="picture" required />
+          <input
+            id="picture"
+            onChange={this.changeHandler}
+            type="text"
+            placeholder="Enter Picture Url"
+            name="picture"
+            required
+          />
 
           <b>Bio</b>
           <input
             id="bio"
+            onChange={this.changeHandler}
             type="text"
             placeholder="Write a Short Bio About Yourself"
             maxLength="255"

@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const dummyData = require('../database/dummyData.js');
+const { dummyData } = require('../database/dummyData.js');
 const { db } = require('../database/index.js');
 
 const app = express();
@@ -32,6 +32,27 @@ app.post('/dummyData', (req, res) => {
 // app.post('/', (req, res) => {
 
 // app.post('/', (req, res) => {
+app.post('/signup', (req, res) => {
+  const userEntry = req.body;
+  const query = `SELECT * FROM users
+  WHERE username = '${req.body.username}'`;
+  db.query(query)
+    .then((data) => {
+      if (data.length) {
+        res.end('Username is already taken!');
+      } else {
+        db.query(`INSERT INTO users (name, username, password, bio, picture)
+        VALUES ('${userEntry.name}', '${userEntry.username}', '${userEntry.password}', '${userEntry.bio}', '${userEntry.picture}')`)
+          .then(() => {
+            console.log(`${userEntry.name} with username ${userEntry.username} was successfully added to the DB`);
+            res.end(`${userEntry.name} with username ${userEntry.username} was successfully added to the DB`);
+          })
+          .catch((err) => {
+            console.log('THIS IS AN ERROR', err);
+          });
+      }
+    });
+});
 
 // });
 
@@ -40,7 +61,7 @@ app.post('/dummyData', (req, res) => {
 // });
 
 function initialDBPopulation() {
-  dummyData.dummyData.forEach((entry) => {
+  dummyData.forEach((entry) => {
     db.query(`INSERT INTO users (name, username, password, bio, picture)
     VALUES ('${entry.name}', '${entry.username}', '${entry.password}', '${entry.bio}', '${entry.picture}')`)
       .then(() => {
