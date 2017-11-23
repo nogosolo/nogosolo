@@ -13,10 +13,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // `INSERT INTO users (username, password, )
 //   VALUES ("${entry.username}", )`
 
-// app.post('/', (req, res) => {
 
 app.get('/match/:username', (req, res) => {
-  // console.log(req.body);
   const query = `SELECT * FROM users
   WHERE username = '${req.url.split('/')[2]}'`;
   db.query(query)
@@ -56,6 +54,17 @@ function initialDBPopulation() {
     db.query(`INSERT INTO users (name, username, password, bio, picture)
     VALUES ('${entry.name}', '${entry.username}', '${entry.password}', '${entry.bio}', '${entry.picture}')`)
       .then(() => {
+        db.query(`SELECT id FROM users WHERE username = '${entry.username}'`)
+          .then((data) => {
+            entry.events.forEach((event) => {
+              const queryStr = `INSERT INTO user_event (userid, eventid)
+              VALUES (${data[0].id}, ${event})`;
+              db.query(queryStr)
+                .then(() => {
+                  console.log(`${entry.name} going to event: ${event} added to DB`);
+                });
+            });
+          });
         console.log(`${entry.name} with username ${entry.username} was successfully added to the DB`);
       })
       .catch((err) => {
