@@ -117,6 +117,22 @@ function addPotentialMatchInit(userid, eventid) { // temporary to populate datab
 =======
 app.post('/login', (req, res) => {
   console.log('req', req.body);
+  const username = req.body.username;
+  const password = req.body.password;
+  db.query(`SELECT * FROM users WHERE username = '${username}' AND password = '${password}'`)
+    .then((data) => {
+      if (data.length === 0) {
+      // redirect
+        console.log('try again');
+        res.send('try again');
+      } else {
+        console.log('success');
+        res.send('success');
+      }
+    })
+    .catch((err) => {
+      console.log('error');
+    });
 });
 >>>>>>> ajax for login started
 

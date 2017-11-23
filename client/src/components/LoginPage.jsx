@@ -27,7 +27,12 @@ class LoginPage extends React.Component {
       url: '/login',
       method: 'POST',
       success: (data) => {
+        if (data === 'success') {
+          console.log('sign in')
 
+        } else {
+          console.log('error', data);
+        }
       },
       data: {
         username: context.state.username,
@@ -39,9 +44,9 @@ class LoginPage extends React.Component {
     //  this.setState({ active: !currentState });
   }
 
-  handleSignin() {
-    console.log(this.state.username)
-  }
+  // handleSignin() {
+  //   console.log(this.state.username)
+  // }
 
   changeHandler(event) {
     this.setState({
@@ -59,6 +64,7 @@ class LoginPage extends React.Component {
           <div className="container">
             <b>Username</b>
             <input
+              id="username"
               type="text"
               onChange={this.changeHandler}
               placeholder="Enter Username"
@@ -67,6 +73,7 @@ class LoginPage extends React.Component {
             />
             <b>Password</b>
             <input
+              id="password"
               type="password"
               onChange={this.changeHandler}
               placeholder="Enter Password"
