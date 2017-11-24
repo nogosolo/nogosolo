@@ -18,10 +18,10 @@ class Search extends React.Component {
       datatype: 'json',
       url: `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${apiKey}&keyword=${this.props.searchQuery}`,
       success: (data) => {
-        const eventNames = data._embedded.events;
+        const events = data._embedded.events;
         window.x = data; // just to look at stuff in chrome
         this.setState({
-          results: eventNames,
+          results: events,
         });
       },
     });
