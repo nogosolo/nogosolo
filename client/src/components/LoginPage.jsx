@@ -27,8 +27,9 @@ class LoginPage extends React.Component {
       url: '/login',
       method: 'POST',
       success: (data) => {
-        if (data === 'success') {
-          console.log('sign in')
+        if (data) {
+          console.log('sign in', typeof data);
+          data = JSON.parse(data);
 
         } else {
           console.log('error', data);
