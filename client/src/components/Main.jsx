@@ -16,7 +16,7 @@ const Main = props => (
       <Route exact path="/" component={Home} />
       <Route path="/signup" component={SignupPage} />
       <Route path="/search" render={() => <SearchPage searchQuery={props.searchQuery} />} />
-      <Route path="/match" render={() => <MatchPage />} />
+      <Route path="/match" render={() => <MatchPage userId={2} />} />
     </Switch>
   </main>
 );
