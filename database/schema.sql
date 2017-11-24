@@ -29,10 +29,40 @@ CREATE TABLE match (
   id SERIAL,
   user1 INTEGER NOT NULL,
   user2 INTEGER NOT NULL,
-  status BIT NULL DEFAULT NULL,
+  status BOOLEAN DEFAULT NULL,
   PRIMARY KEY (id)
 );
 
 ALTER TABLE user_event ADD FOREIGN KEY (userId) REFERENCES users (id);
 ALTER TABLE match ADD FOREIGN KEY (user1) REFERENCES users (id);
 ALTER TABLE match ADD FOREIGN KEY (user2) REFERENCES users (id);
+
+--
+--
+-- SELECT distinct u.id, u.name, u2.name as "matchName", u2.id as "matchId" FROM users u
+--   INNER JOIN user_event ue
+--     ON u.id = ue.userid
+--   INNER JOIN match m
+--     ON u.id = m.user1
+--   INNER JOIN users u2
+--     ON m.user2 = u2.id
+--   WHERE m.status IS NULL AND u.username = 'theBeth'
+--   limit 1;
+--
+--
+-- SELECT eventId from user_event
+--   WHERE userId = 1;
+--
+--
+--
+--
+--   SELECT distinct u.id, u2.name as "matchName"
+--   , u2.id as "matchId", u2.bio, u2.picture FROM users u
+--     INNER JOIN user_event ue
+--       ON u.id = ue.userid
+--     INNER JOIN match m
+--       ON u.id = m.user1
+--     INNER JOIN users u2
+--       ON m.user2 = u2.id
+--     WHERE m.status IS NULL AND u.username = 'theBeth'
+--     limit 1;
