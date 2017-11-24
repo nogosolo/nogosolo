@@ -16,11 +16,39 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 
 app.get('/match/:username', (req, res) => {
-  const query = `SELECT * FROM users
-  WHERE username = '${req.url.split('/')[2]}'`;
+  const reply = {};
+  const query = `SELECT distinct u.id, u2.name as "matchName"
+  , u2.id as "matchId", u2.bio, u2.picture FROM users u
+    INNER JOIN user_event ue
+      ON u.id = ue.userid
+    INNER JOIN match m
+      ON u.id = m.user1
+    INNER JOIN users u2
+      ON m.user2 = u2.id
+    WHERE m.status IS NULL AND u.username = '${req.url.split('/')[2]}'
+    limit 1`;
   db.query(query)
-    .then((data) => {
-      res.json(data[0]);
+    .then((matchData) => {
+      if (!matchData.length) {
+        res.end('No new potential matches');
+      }
+      reply.name = matchData[0].matchName;
+      reply.bio = matchData[0].bio;
+      reply.picture = matchData[0].picture;
+      reply.events = [];
+      db.query(`SELECT eventId from user_event
+        WHERE userId = ${matchData[0].matchId}`)
+        .then((events) => {
+          for (let i = 0; i < events.length; i += 1) {
+            reply.events.push(events[i].eventid);
+            if (i === events.length - 1) {
+              res.json(reply);
+            }
+          }
+        })
+        .catch((err) => {
+          console.log('THIS IS AN ERROR', err);
+        });
     })
     .catch((err) => {
       console.log('THIS IS AN ERROR', err);
