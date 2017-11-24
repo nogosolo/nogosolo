@@ -14,8 +14,17 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // `INSERT INTO users (username, password, )
 //   VALUES ("${entry.username}", )`
 
+app.post('/match', (req, res) => {
+const query = `UPDATE match
+  SET status = CASE ${req.body.matchStatus} WHEN 1 THEN TRUE ELSE FALSE END
+  WHERE user1 = ${req.body.userId} AND user2 = ${req.body.matchId}`;
+  db.query(query)
+    .then(() => {
+      res.send(`Match status successfully updates to: ${req.body.matchStatus}`);
+    });
+});
 
-app.get('/match/:username', (req, res) => {
+app.get('/match/:userId', (req, res) => {
   const reply = {};
   const query = `SELECT distinct u.id, u2.name as "matchName"
   , u2.id as "matchId", u2.bio, u2.picture FROM users u
@@ -25,7 +34,7 @@ app.get('/match/:username', (req, res) => {
       ON u.id = m.user1
     INNER JOIN users u2
       ON m.user2 = u2.id
-    WHERE m.status IS NULL AND u.username = '${req.url.split('/')[2]}'
+    WHERE m.status IS NULL AND u.id = ${req.url.split('/')[2]}
     limit 1`;
   db.query(query)
     .then((matchData) => {
@@ -35,6 +44,7 @@ app.get('/match/:username', (req, res) => {
       reply.name = matchData[0].matchName;
       reply.bio = matchData[0].bio;
       reply.picture = matchData[0].picture;
+      reply.matchId = matchData[0].matchId;
       reply.events = [];
       db.query(`SELECT eventId from user_event
         WHERE userId = ${matchData[0].matchId}`)
