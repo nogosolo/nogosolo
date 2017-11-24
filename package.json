@@ -10,7 +10,9 @@
     "start": "node server/index.js",
     "react-dev": "webpack -d --watch",
     "server-dev": "nodemon server/index.js",
-    "lint": "eslint . --ext .jsx,.js"
+    "lint": "eslint . --ext .jsx,.js",
+    "post": "pg_ctl -D /usr/local/var/postgres start",
+    "initdb": "psql postgres -U nogosolo < database/schema.sql"
   },
   "pre-commit": [
     "lint"
@@ -33,10 +35,8 @@
     "react": "^16.1.1",
     "react-click-outside": "^3.0.0",
     "react-dom": "^16.1.1",
-    "react-image-slider": "^0.1.0",
     "react-router-dom": "^4.2.2",
-    "request": "^2.83.0",
-    "ejs": "^2.5.6"
+    "request": "^2.83.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",

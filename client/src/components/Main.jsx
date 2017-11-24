@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import Home from './Home';
 import SignupPage from './SignupPage';
 import SearchPage from './SearchPage';
+import MatchPage from './MatchPage';
 
 // The Main component renders one of the three provided
 // Routes (provided that one matches). Both the /roster
@@ -15,6 +16,7 @@ const Main = props => (
       <Route exact path="/" component={Home} />
       <Route path="/signup" component={SignupPage} />
       <Route path="/search" render={() => <SearchPage searchQuery={props.searchQuery} />} />
+      <Route path="/match" render={() => <MatchPage userId={2} />} />
     </Switch>
   </main>
 );

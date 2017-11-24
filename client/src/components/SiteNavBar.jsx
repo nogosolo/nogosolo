@@ -14,7 +14,7 @@ const SiteNavBar = function (props) {
           <li><LoginButton triggerLogin={props.triggerLogin} /></li>
           <li><Link to="/signup">Sign up</Link></li>
           <li><SearchBox searchHandler={props.searchHandler} /></li>
-
+          <li><Link to="/match"> Find Your Match </Link> </li>
         </ul>
       </nav>
     </header>
