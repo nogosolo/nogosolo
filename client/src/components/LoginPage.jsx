@@ -1,6 +1,7 @@
 import React from 'react';
 import enhanceWithClickOutside from 'react-click-outside';
 import { Link } from 'react-router-dom';
+import $ from 'jquery';
 
 
 class LoginPage extends React.Component {
@@ -20,13 +21,34 @@ class LoginPage extends React.Component {
   }
 
   clickHandler(event) {
-    const currentState = this.state.active;
-    this.setState({ active: !currentState });
+    event.preventDefault();
+    const context = this;
+    $.ajax({
+      url: '/login',
+      method: 'POST',
+      success: (data) => {
+        if (data) {
+          console.log('sign in', data);
+          data = JSON.parse(data);
+          context.props.setUser(data);
+
+        } else {
+          console.log('error', data);
+        }
+      },
+      data: {
+        username: context.state.username,
+        password: context.state.password,
+      }
+
+    })
+    //  const currentState = this.state.active;
+    //  this.setState({ active: !currentState });
   }
 
-  handleSignin() {
-    console.log(this.state.username)
-  }
+  // handleSignin() {
+  //   console.log(this.state.username)
+  // }
 
   changeHandler(event) {
     this.setState({
@@ -44,6 +66,7 @@ class LoginPage extends React.Component {
           <div className="container">
             <b>Username</b>
             <input
+              id="username"
               type="text"
               onChange={this.changeHandler}
               placeholder="Enter Username"
@@ -52,13 +75,14 @@ class LoginPage extends React.Component {
             />
             <b>Password</b>
             <input
+              id="password"
               type="password"
               onChange={this.changeHandler}
               placeholder="Enter Password"
               name="psw"
               required
             />
-            <button type="submit">Login</button>
+            <button type="submit" onClick={this.clickHandler}>Login</button>
           </div>
           <div className="container" style={{ backgroundColor: '#f1f1f1' }}>
             <button

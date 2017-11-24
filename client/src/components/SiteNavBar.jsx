@@ -11,8 +11,8 @@ const SiteNavBar = function (props) {
       <nav>
         <ul>
           <li><Link to="/" >Home</Link></li>
-          <li><LoginButton triggerLogin={props.triggerLogin} /></li>
-          <li><Link to="/signup">Sign up</Link></li>
+          {!props.isLoggedin && (<li><LoginButton triggerLogin={props.triggerLogin} /></li>)}
+          {!props.isLoggedin && (<li><Link to="/signup">Sign up</Link></li>)}
           <li><SearchBox searchHandler={props.searchHandler} /></li>
           <li><Link to="/match"> Find Your Match </Link> </li>
         </ul>

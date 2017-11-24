@@ -8,10 +8,31 @@ class App extends React.Component {
     super(props);
     this.toggleLogin = this.toggleLogin.bind(this);
     this.searchHandler = this.searchHandler.bind(this);
+    this.setUser = this.setUser.bind(this);
     this.state = {
       showLogin: false,
       searchQuery: '',
+      alreadyLoggedin: false,
+      userdata: {
+        userid: 0,
+        name: '',
+        username: '',
+        bio: '',
+        picture: '',
+      },
     };
+  }
+  setUser(userdata) {
+    this.setState({
+      userdata: {
+        userid: userdata.userid,
+          name: userdata.name,
+          username: userdata.username,
+          bio: userdata.bio,
+          picture: userdata.picture,
+      },
+      alreadyLoggedin: !this.state.alreadyLoggedin,
+    })
   }
 
   searchHandler(query) {
@@ -27,9 +48,10 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <SiteNavBar triggerLogin={this.toggleLogin} searchHandler={this.searchHandler} />
-        <Main searchQuery={this.state.searchQuery} />
-        {this.state.showLogin && (<LoginPage triggerLogin={this.toggleLogin} />)}
+        <SiteNavBar triggerLogin={this.toggleLogin} searchHandler={this.searchHandler}
+        isLoggedin={this.state.alreadyLoggedin}/>
+        <Main searchQuery={this.state.searchQuery} userdata={this.state.userdata}/>
+        {this.state.showLogin && (<LoginPage setUser={this.setUser} triggerLogin={this.toggleLogin} />)}
       </div>
     );
   }
