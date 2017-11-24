@@ -13,11 +13,13 @@ class App extends React.Component {
       showLogin: false,
       searchQuery: '',
       alreadyLoggedin: false,
-      userid: 0,
-      name: '',
-      username: '',
-      bio: '',
-      picture: '',
+      userdata: {
+        userid: 0,
+        name: '',
+        username: '',
+        bio: '',
+        picture: '',
+      },
     };
   }
   setUser(userdata) {
@@ -25,13 +27,23 @@ class App extends React.Component {
     // console.log('this is what is passed up to app', userdata);
     // console.log('this is the state before', this.state);
     this.setState({
-      userid: userdata.userid,
-      name: userdata.name,
-      username: userdata.username,
-      bio: userdata.bio,
-      picture: userdata.picture,
+      userdata: {
+        userid: userdata.userid,
+          name: userdata.name,
+          username: userdata.username,
+          bio: userdata.bio,
+          picture: userdata.picture,
+      },
       alreadyLoggedin: !this.state.alreadyLoggedin,
     })
+    // this.setState({
+    //   userid: userdata.userid,
+    //   name: userdata.name,
+    //   username: userdata.username,
+    //   bio: userdata.bio,
+    //   picture: userdata.picture,
+    //   alreadyLoggedin: !this.state.alreadyLoggedin,
+    // })
     // console.log('this is the state after', this.state);
 
 
