@@ -22,7 +22,7 @@ class LoginPage extends React.Component {
 
   clickHandler(event) {
     event.preventDefault();
-    var context = this;
+    const context = this;
     $.ajax({
       url: '/login',
       method: 'POST',

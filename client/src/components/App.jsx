@@ -23,9 +23,6 @@ class App extends React.Component {
     };
   }
   setUser(userdata) {
-    // console.log('ID : ', userdata.userid);
-    // console.log('this is what is passed up to app', userdata);
-    // console.log('this is the state before', this.state);
     this.setState({
       userdata: {
         userid: userdata.userid,
@@ -36,17 +33,6 @@ class App extends React.Component {
       },
       alreadyLoggedin: !this.state.alreadyLoggedin,
     })
-    // this.setState({
-    //   userid: userdata.userid,
-    //   name: userdata.name,
-    //   username: userdata.username,
-    //   bio: userdata.bio,
-    //   picture: userdata.picture,
-    //   alreadyLoggedin: !this.state.alreadyLoggedin,
-    // })
-    // console.log('this is the state after', this.state);
-
-
   }
 
   searchHandler(query) {
@@ -62,8 +48,9 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <SiteNavBar triggerLogin={this.toggleLogin} searchHandler={this.searchHandler} />
-        <Main searchQuery={this.state.searchQuery} userName={this.state.username}/>
+        <SiteNavBar triggerLogin={this.toggleLogin} searchHandler={this.searchHandler}
+        isLoggedin={this.state.alreadyLoggedin}/>
+        <Main searchQuery={this.state.searchQuery} userdata={this.state.userdata}/>
         {this.state.showLogin && (<LoginPage setUser={this.setUser} triggerLogin={this.toggleLogin} />)}
       </div>
     );
