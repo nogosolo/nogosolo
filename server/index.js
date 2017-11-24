@@ -87,7 +87,26 @@ app.post('/signup', (req, res) => {
     });
 });
 
-<<<<<<< HEAD
+app.post('/login', (req, res) => {
+  const { username, password } = req.body
+  console.log('!!!!!!!!!!!!!', password);
+  db.query(`SELECT * FROM users WHERE username = '${username}' AND password = '${password}'`)
+  .then((data) => {
+    console.log('8888888888888', Array.isArray(data));
+    if (data.length === 0) {
+      console.log('incorrect login, please try again');
+      res.end('redirect to login again');
+    } else {
+      (console.log('login confirmed'));
+      res.end('success');
+    }
+  })
+  .catch((err) => {
+    console.log('error', err);
+  })
+
+})
+
 
 function addPotentialMatchInit(userid, eventid) { // temporary to populate database
   db.query(`SELECT * FROM user_event
@@ -114,27 +133,6 @@ function addPotentialMatchInit(userid, eventid) { // temporary to populate datab
       console.log('THIS IS AN ERROR', err);
     });
 }
-=======
-app.post('/login', (req, res) => {
-  console.log('req', req.body);
-  const username = req.body.username;
-  const password = req.body.password;
-  db.query(`SELECT * FROM users WHERE username = '${username}' AND password = '${password}'`)
-    .then((data) => {
-      if (data.length === 0) {
-      // redirect
-        console.log('try again');
-        res.send('try again');
-      } else {
-        console.log('success');
-        res.send('success');
-      }
-    })
-    .catch((err) => {
-      console.log('error');
-    });
-});
->>>>>>> ajax for login started
 
 function initialDBPopulation() {
   dummyData.forEach((entry) => {
