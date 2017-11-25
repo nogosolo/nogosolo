@@ -20,7 +20,7 @@ app.post('/match', (req, res) => {
   WHERE user1 = ${req.body.userId} AND user2 = ${req.body.matchId}`;
   db.query(query)
     .then(() => {
-      res.send(`Match status successfully updates to: ${req.body.matchStatus}`);
+      res.end(`Match status successfully updates to: ${req.body.matchStatus}`);
     });
 });
 
@@ -109,10 +109,21 @@ app.post('/login', (req, res) => {
       }
     })
     .catch((err) => {
-      console.log('error', err);
+      console.log('There was an Error', err);
     });
 });
 
+app.post('/event', (req, res) => {
+  db.query(`INSERT INTO user_event (userId, eventId)
+  VALUES (${req.body.userId}, '${req.body.eventId}')`)
+    .then(() => {
+      console.log(`userID:${req.body.userid} and eventID: ${req.body.eventId} was successfully added to the DB`);
+      res.end(`userID:${req.body.userId} and eventID: ${req.body.eventId} was successfully added to the DB`);
+    })
+    .catch((err) => {
+      console.log('There was an Error', err);
+    });
+});
 
 function addPotentialMatchInit(userid, eventid) { // temporary to populate database
   db.query(`SELECT * FROM user_event
