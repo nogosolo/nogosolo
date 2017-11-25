@@ -4,6 +4,7 @@ module.exports = {
     "func-names": ["error", "never"],
     "no-undef": "warn",
     "no-unused-vars": "warn",
-    "jsx-a11y/anchor-is-valid": "warn"
+    "jsx-a11y/anchor-is-valid": "warn",
+    "no-underscore-dangle": "warn"
   }
 }
