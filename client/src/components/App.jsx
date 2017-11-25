@@ -29,13 +29,13 @@ class App extends React.Component {
     this.setState({
       userdata: {
         userid: userdata.userid,
-          name: userdata.name,
-          username: userdata.username,
-          bio: userdata.bio,
-          picture: userdata.picture,
+        name: userdata.name,
+        username: userdata.username,
+        bio: userdata.bio,
+        picture: userdata.picture,
       },
       alreadyLoggedin: !this.state.alreadyLoggedin,
-    })
+    });
   }
 
   searchHandler(query) {
@@ -49,17 +49,30 @@ class App extends React.Component {
   }
 
   eventSearchClick(event) {
-    console.log(event)
-    this.setState({selectedEvent: event});
+    console.log(event);
+    this.setState({ selectedEvent: event });
   }
 
   render() {
     return (
       <div>
-        <SiteNavBar triggerLogin={this.toggleLogin} searchHandler={this.searchHandler}
-        isLoggedin={this.state.alreadyLoggedin}/>
-        <Main searchQuery={this.state.searchQuery} userdata={this.state.userdata} selectedEvent={this.state.selectedEvent} eventSearchClick={this.eventSearchClick} />
-        {this.state.showLogin && (<LoginPage setUser={this.setUser} triggerLogin={this.toggleLogin} />)}
+        <SiteNavBar
+          triggerLogin={this.toggleLogin}
+          searchHandler={this.searchHandler}
+          isLoggedin={this.state.alreadyLoggedin}
+        />
+        <Main
+          searchQuery={this.state.searchQuery}
+          userdata={this.state.userdata}
+          selectedEvent={this.state.selectedEvent}
+          eventSearchClick={this.eventSearchClick}
+        />
+        {this.state.showLogin && (
+          <LoginPage
+            setUser={this.setUser}
+            triggerLogin={this.toggleLogin}
+          />
+        )}
       </div>
     );
   }
