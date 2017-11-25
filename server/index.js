@@ -24,6 +24,23 @@ app.post('/match', (req, res) => {
     });
 });
 
+app.get('/event/:eventId/:userId', (req, res) => {
+  reqArr = req.url.split('/');
+  const query = `SELECT * FROM user_event
+  WHERE userId = ${reqArr[3]} AND eventId = '${reqArr[2]}'`
+  db.query(query)
+    .then((eventData) => {
+      if (eventData.length) {
+        res.send(true);
+      } else {
+        res.send(false);
+      }
+    })
+    .catch((err) => {
+      console.log('THIS IS AN ERROR', err);
+    });
+})
+
 app.get('/match/:userId', (req, res) => {
   const reply = {};
   const query = `SELECT distinct u.id, u2.name as "matchName"
@@ -117,7 +134,8 @@ app.post('/event', (req, res) => {
   db.query(`INSERT INTO user_event (userId, eventId)
   VALUES (${req.body.userId}, '${req.body.eventId}')`)
     .then(() => {
-      console.log(`userID:${req.body.userid} and eventID: ${req.body.eventId} was successfully added to the DB`);
+      console.log(`userID:${req.body.userId} and eventID: ${req.body.eventId} was successfully added to the DB`);
+      helpers.addPotentialMatchs(req.body.userId, req.body.eventId);
       res.end(`userID:${req.body.userId} and eventID: ${req.body.eventId} was successfully added to the DB`);
     })
     .catch((err) => {

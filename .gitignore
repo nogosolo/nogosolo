@@ -39,3 +39,4 @@ Thumbs.db
 node_modules
 config.js
 .env
+client/dist/bundle.js
