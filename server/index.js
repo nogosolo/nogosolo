@@ -20,7 +20,7 @@ app.post('/match', (req, res) => {
   WHERE user1 = ${req.body.userId} AND user2 = ${req.body.matchId}`;
   db.query(query)
     .then(() => {
-      res.send(`Match status successfully updates to: ${req.body.matchStatus}`);
+      res.end(`Match status successfully updates to: ${req.body.matchStatus}`);
     });
 });
 
@@ -88,31 +88,37 @@ app.post('/signup', (req, res) => {
 });
 
 app.post('/login', (req, res) => {
-  const { username, password } = req.body;
-  console.log('!!!!!!!!!!!!!', password);
-  db.query(`SELECT * FROM users WHERE username = '${username}' AND password = '${password}'`)
-    .then((data) => {
-      console.log('8888888888888', Array.isArray(data));
-      if (data.length === 0) {
-        console.log('incorrect login, please try again');
-        res.end('redirect to login again');
-      } else {
-        (console.log('login confirmed'));
-        const reply = {
-          userid: data[0].id,
-          name: data[0].name,
-          username: data[0].username,
-          bio: data[0].bio,
-          picture: data[0].picture,
-        };
-        res.end(JSON.stringify(reply));
-      }
+   const { username, password } = req.body;
+   console.log('!!!!!!!!!!!!!', password);
+   db.query(`SELECT * FROM users WHERE username = '${username}' AND password = '${password}'`)
+     .then((data) => {
+       console.log('8888888888888', Array.isArray(data));
+       if (data.length === 0) {
+         console.log('incorrect login, please try again');
+         res.end('redirect to login again');
+       } else {
+         (console.log('login confirmed'));
+         const reply = {
+           userid: data[0].id,
+           name: data[0].name,
+           username: data[0].username,
+           bio: data[0].bio,
+           picture: data[0].picture,
+         };
+         res.end(JSON.stringify(reply));
+       }
+
+app.post('/event', (req, res) => {
+  db.query(`INSERT INTO user_event (userId, eventId)
+  VALUES (${req.body.userId}, '${req.body.eventId}')`)
+    .then(() => {
+      console.log(`userID:${req.body.userid} and eventID: ${req.body.eventId} was successfully added to the DB`);
+      res.end(`userID:${req.body.userId} and eventID: ${req.body.eventId} was successfully added to the DB`);
     })
     .catch((err) => {
-      console.log('error', err);
+      console.log('There was an Error', err);
     });
 });
-
 
 function addPotentialMatchInit(userid, eventid) { // temporary to populate database
   db.query(`SELECT * FROM user_event
