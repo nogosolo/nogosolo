@@ -87,6 +87,27 @@ app.post('/signup', (req, res) => {
     });
 });
 
+app.post('/login', (req, res) => {
+   const { username, password } = req.body;
+   console.log('!!!!!!!!!!!!!', password);
+   db.query(`SELECT * FROM users WHERE username = '${username}' AND password = '${password}'`)
+     .then((data) => {
+       console.log('8888888888888', Array.isArray(data));
+       if (data.length === 0) {
+         console.log('incorrect login, please try again');
+         res.end('redirect to login again');
+       } else {
+         (console.log('login confirmed'));
+         const reply = {
+           userid: data[0].id,
+           name: data[0].name,
+           username: data[0].username,
+           bio: data[0].bio,
+           picture: data[0].picture,
+         };
+         res.end(JSON.stringify(reply));
+       }
+
 app.post('/event', (req, res) => {
   db.query(`INSERT INTO user_event (userId, eventId)
   VALUES (${req.body.userId}, '${req.body.eventId}')`)
