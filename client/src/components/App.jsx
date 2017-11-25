@@ -35,6 +35,7 @@ class App extends React.Component {
         picture: userdata.picture,
       },
       alreadyLoggedin: !this.state.alreadyLoggedin,
+      showLogin: false,
     });
   }
 

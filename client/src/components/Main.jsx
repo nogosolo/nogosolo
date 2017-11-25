@@ -23,8 +23,13 @@ const Main = props => (
           searchQuery={props.searchQuery}
         />)}
       />
-      <Route path="/match" render={() => <MatchPage userId={2} />} />
-      <Route path="/event" render={() => <EventPage event={props.selectedEvent} />} />
+      <Route path="/match" render={() => <MatchPage userId={props.userdata.userid} />} />
+      <Route path="/event" render={() => <EventPage
+        userId={props.userdata.userid}
+        event={props.selectedEvent}
+      />
+    }
+      />
     </Switch>
   </main>
 );

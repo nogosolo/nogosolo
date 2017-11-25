@@ -13,14 +13,13 @@ class EventPage extends React.Component {
 
 
   componentDidMount() {
-    // $.ajax({  // need to check if user has already clicked attending
-    //   type: 'GET',
-    //   url: `/match/${this.props.userId}`,
-    //   success: (resp) => {
-    //     console.log(resp);
-    //     this.setState(resp);
-    //   },
-    // });
+    $.ajax({
+      type: 'GET',
+      url: `/event/${this.props.event.id}/${this.props.userId}`,
+      success: (resp) => {
+        this.setState({ attending: resp });
+      },
+    });
   }
 
   clickHandler(event) {
@@ -34,7 +33,6 @@ class EventPage extends React.Component {
       success: (resp) => {
         console.log(resp);
         this.setState({ attending: true });
-        this.componentDidMount();
       },
     });
   }
@@ -53,10 +51,5 @@ class EventPage extends React.Component {
     );
   }
 }
-
-
-
-
-
 
 export default EventPage;
