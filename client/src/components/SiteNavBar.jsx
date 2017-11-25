@@ -8,14 +8,14 @@ import SearchBox from './SearchBox';
 const SiteNavBar = function (props) {
   return (
     <header>
-      <nav>
-        <ul>
-          <li><Link to="/" >Home</Link></li>
-          {!props.isLoggedin && (<li><LoginButton triggerLogin={props.triggerLogin} /></li>)}
-          {!props.isLoggedin && (<li><Link to="/signup">Sign up</Link></li>)}
-          <li><SearchBox searchHandler={props.searchHandler} /></li>
-          <li><Link to="/match"> Find Your Match </Link> </li>
-        </ul>
+      <nav className="bar">
+        <span>
+          <span className="home"><Link to="/" >Home</Link></span>
+          {!props.isLoggedin && (<span className="signupbutton"><Link to="/signup">Sign up</Link></span>)}
+          {!props.isLoggedin && (<span className="loginbutton"><LoginButton triggerLogin={props.triggerLogin} /></span>)}
+          <Link to="/match"> Find Your Match </Link>
+          <b><SearchBox className="searchbar" searchHandler={props.searchHandler} /></b>
+        </span>
       </nav>
     </header>
   );
