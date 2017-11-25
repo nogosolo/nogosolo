@@ -134,7 +134,8 @@ app.post('/event', (req, res) => {
   db.query(`INSERT INTO user_event (userId, eventId)
   VALUES (${req.body.userId}, '${req.body.eventId}')`)
     .then(() => {
-      console.log(`userID:${req.body.userid} and eventID: ${req.body.eventId} was successfully added to the DB`);
+      console.log(`userID:${req.body.userId} and eventID: ${req.body.eventId} was successfully added to the DB`);
+      helpers.addPotentialMatchs(req.body.userId, req.body.eventId);
       res.end(`userID:${req.body.userId} and eventID: ${req.body.eventId} was successfully added to the DB`);
     })
     .catch((err) => {
