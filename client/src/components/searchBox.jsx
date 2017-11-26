@@ -23,7 +23,7 @@ class SearchBox extends React.Component {
 
   render() {
     return (
-      <span className="searchbar">
+      <span className="searchbar" >
         <input type="text" value={this.state.keyword} onChange={this.changeHandler} />
         <Link onClick={this.clickHandler} to="/search">Search</Link>
       </span>
