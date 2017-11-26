@@ -8,11 +8,12 @@ describe('Database Schema:', function() {
      db.query(queryString)
        .then((data) => {
          expect(true).to.equal(true);
+         done();
        })
        .catch((err) => {
          expect(false).to.equal(true);
          console.log('there is a problem in the users table', err);
        })
-    }
+    })
     //  it('contains a ')
-  }
+  })

@@ -12,7 +12,8 @@
     "server-dev": "nodemon server/index.js",
     "lint": "eslint . --ext .jsx,.js",
     "post": "pg_ctl -D /usr/local/var/postgres start",
-    "initdb": "psql postgres -U nogosolo < database/schema.sql"
+    "initdb": "psql postgres -U nogosolo < database/schema.sql",
+    "test-db": "mocha --bail --reporter nyan spec/dbtests.js; pkill -n node;"
   },
   "pre-commit": [
     "lint"
