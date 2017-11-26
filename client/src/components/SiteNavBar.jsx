@@ -22,7 +22,7 @@ import SearchBox from './SearchBox';
 const SiteNavBar = function(props) {
   return (
     <div className="topnav" id="myTopnav">
-      <a href="/">Home</a>
+      <Link to="/" >Home</Link>
       {!props.isLoggedin && (<Link to="/signup">Sign up</Link>)}
       {!props.isLoggedin && (<LoginButton triggerLogin={props.triggerLogin} />)}
       <Link to="/match">Match </Link>

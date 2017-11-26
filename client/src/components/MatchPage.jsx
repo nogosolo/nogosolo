@@ -23,7 +23,7 @@ class MatchPage extends React.Component {
       success: (resp) => {
         console.log(resp);
         this.setState(resp);
-      },
+      }
     });
   }
 
