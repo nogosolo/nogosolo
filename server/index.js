@@ -63,7 +63,7 @@ app.get('/match/:userId', (req, res) => {
       reply.picture = matchData[0].picture;
       reply.matchId = matchData[0].matchId;
       reply.events = [];
-      db.query(`SELECT eventInfoStr as "eventInfoStr" from user_event
+      db.query(`SELECT eventInfoStr as "eventInfoStr" from users_events
         WHERE userId = ${matchData[0].matchId}`)
         .then((events) => {
           for (let i = 0; i < events.length; i += 1) {
@@ -131,7 +131,7 @@ app.post('/login', (req, res) => {
 });
 
 app.post('/event', (req, res) => {
-  db.query(`INSERT INTO user_event (userId, eventId, eventInfoStr)
+  db.query(`INSERT INTO users_events (userId, eventId, eventInfoStr)
   VALUES (${req.body.userId}, '${req.body.eventId}', '${req.body.eventInfoStr}')`)
     .then(() => {
       console.log(`userID:${req.body.userId} and eventID: ${req.body.eventId} was successfully added to the DB`);
@@ -178,7 +178,7 @@ function initialDBPopulation() {
           .then((data) => {
             entry.events.forEach((event) => {
               const eventStr = `${event}d`;
-              const queryStr = `INSERT INTO user_event (userid, eventid, eventInfoStr)
+              const queryStr = `INSERT INTO users_events (userid, eventid, eventInfoStr)
               VALUES (${data[0].id}, '${eventStr}', '${eventStr}')`;
               db.query(queryStr)
                 .then(() => {
