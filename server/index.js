@@ -39,7 +39,7 @@ app.get('/event/:eventId/:userId', (req, res) => {
     .catch((err) => {
       console.log('THIS IS AN ERROR', err);
     });
-})
+});
 
 app.get('/match/:userId', (req, res) => {
   const reply = {};
@@ -63,11 +63,11 @@ app.get('/match/:userId', (req, res) => {
       reply.picture = matchData[0].picture;
       reply.matchId = matchData[0].matchId;
       reply.events = [];
-      db.query(`SELECT eventId from user_event
+      db.query(`SELECT eventInfoStr as "eventInfoStr" from user_event
         WHERE userId = ${matchData[0].matchId}`)
         .then((events) => {
           for (let i = 0; i < events.length; i += 1) {
-            reply.events.push(events[i].eventid);
+            reply.events.push(events[i].eventInfoStr);
             if (i === events.length - 1) {
               res.json(reply);
             }
@@ -131,8 +131,8 @@ app.post('/login', (req, res) => {
 });
 
 app.post('/event', (req, res) => {
-  db.query(`INSERT INTO user_event (userId, eventId)
-  VALUES (${req.body.userId}, '${req.body.eventId}')`)
+  db.query(`INSERT INTO user_event (userId, eventId, eventInfoStr)
+  VALUES (${req.body.userId}, '${req.body.eventId}', '${req.body.eventInfoStr}')`)
     .then(() => {
       console.log(`userID:${req.body.userId} and eventID: ${req.body.eventId} was successfully added to the DB`);
       helpers.addPotentialMatchs(req.body.userId, req.body.eventId);
@@ -178,8 +178,8 @@ function initialDBPopulation() {
           .then((data) => {
             entry.events.forEach((event) => {
               const eventStr = `${event}d`;
-              const queryStr = `INSERT INTO user_event (userid, eventid)
-              VALUES (${data[0].id}, '${eventStr}')`;
+              const queryStr = `INSERT INTO user_event (userid, eventid, eventInfoStr)
+              VALUES (${data[0].id}, '${eventStr}', '${eventStr}')`;
               db.query(queryStr)
                 .then(() => {
                   console.log(`${entry.name} going to event: ${event} added to DB`);
