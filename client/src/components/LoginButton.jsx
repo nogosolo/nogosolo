@@ -2,7 +2,7 @@ import React from 'react';
 
 const LoginButton = function (props) {
   return (
-    <button onClick={props.triggerLogin}>Login</button>
+    <a onClick={props.triggerLogin}>Login</a>
   );
 };
 

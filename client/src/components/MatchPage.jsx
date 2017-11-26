@@ -23,7 +23,7 @@ class MatchPage extends React.Component {
       success: (resp) => {
         console.log(resp);
         this.setState(resp);
-      },
+      }
     });
   }
 
@@ -45,19 +45,21 @@ class MatchPage extends React.Component {
 
   render() {
     return (
-      <div>
-        <img src={this.state.picture} alt="not found" />
-        <button id={1} onClick={this.clickHandler}>Match</button>
-        <button id={0} onClick={this.clickHandler}>No Match</button>
-        Name: <li>{this.state.name}</li>
-        Bio: <li>{this.state.bio}</li>
-        Events:
-        <ul>
-          {this.state.events.map(event => (<li>{event}</li>))}
-        </ul>
+      <div className="slideshow-container">
+        <div className="mySlides">
+          <img className="matchimg" src={this.state.picture} width="450" height="450" alt="not found" />
+          <br />
+          <button id={1} onClick={this.clickHandler}>Match</button>
+          <button id={0} onClick={this.clickHandler}>No Match</button>
+          <br />
+          <p className="matchname"><b>Name:</b> {this.state.name}</p>
+          <p className="matchbio"><b>Bio:</b> {this.state.bio}</p>
+          <b>Events:</b> {this.state.events.map(event => (<li>{event}</li>))}
+        </div>
       </div>
-    );
+    )
   }
 }
 
 export default MatchPage;
+
