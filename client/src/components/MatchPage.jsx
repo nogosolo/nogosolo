@@ -7,7 +7,6 @@ class MatchPage extends React.Component {
     this.clickHandler = this.clickHandler.bind(this);
     this.state = {
       name: '',
-      event: '',
       bio: '',
       picture: '',
       matchId: 0,
@@ -21,9 +20,14 @@ class MatchPage extends React.Component {
       type: 'GET',
       url: `/match/${this.props.userId}`,
       success: (resp) => {
-        console.log(resp);
-        this.setState(resp);
-      }
+        if (resp === 'No new potential matches') {
+          this.setState({
+            name: '',
+          });
+        } else {
+          this.setState(resp);
+        }
+      },
     });
   }
 
@@ -37,7 +41,6 @@ class MatchPage extends React.Component {
         matchStatus: event.target.id,
       },
       success: (resp) => {
-        console.log(resp);
         this.componentDidMount();
       },
     });
@@ -46,20 +49,30 @@ class MatchPage extends React.Component {
   render() {
     return (
       <div className="slideshow-container">
-        <div className="mySlides">
-          <img className="matchimg" src={this.state.picture} width="450" height="450" alt="not found" />
-          <br />
-          <button id={1} onClick={this.clickHandler}>Match</button>
-          <button id={0} onClick={this.clickHandler}>No Match</button>
-          <br />
-          <p className="matchname"><b>Name:</b> {this.state.name}</p>
-          <p className="matchbio"><b>Bio:</b> {this.state.bio}</p>
-          <b>Events:</b> {this.state.events.map(event => (<li>{event}</li>))}
-        </div>
+        {this.state.name.length && (
+          <div className="mySlides">
+            <img
+              className="matchimg"
+              src={this.state.picture}
+              width="450"
+              height="450"
+              alt="not found"
+            />
+            <br />
+            <button id={1} onClick={this.clickHandler}>Match</button>
+            <button id={0} onClick={this.clickHandler}>No Match</button>
+            <br />
+            <p className="matchname"><b>Name:</b> {this.state.name}</p>
+            <p className="matchbio"><b>Bio:</b> {this.state.bio}</p>
+            <b>Events:</b> {this.state.events.map(event => (<li>{event}</li>))}
+          </div>
+      )}
+        {!this.state.name.length && (
+          <div>No New Possible Matches</div>
+        )}
       </div>
-    )
+    );
   }
 }
 
 export default MatchPage;
-

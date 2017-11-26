@@ -5,6 +5,7 @@ import SignupPage from './SignupPage';
 import SearchPage from './SearchPage';
 import MatchPage from './MatchPage';
 import EventPage from './EventPage';
+import ViewMatches from './ViewMatches';
 
 // The Main component renders one of the three provided
 // Routes (provided that one matches). Both the /roster
@@ -24,12 +25,16 @@ const Main = props => (
         />)}
       />
       <Route path="/match" render={() => <MatchPage userId={props.userdata.userid} />} />
-      <Route path="/event" render={() => <EventPage
-        userId={props.userdata.userid}
-        event={props.selectedEvent}
-      />
+      <Route
+        path="/event"
+        render={() => (<EventPage
+          userId={props.userdata.userid}
+          event={props.selectedEvent}
+        />
+      )
     }
       />
+      <Route path="/viewMatches" render={() => <ViewMatches userId={props.userdata.userid} />} />
     </Switch>
   </main>
 );
