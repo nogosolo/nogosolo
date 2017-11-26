@@ -11,8 +11,48 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 
-// `INSERT INTO users (username, password, )
-//   VALUES ("${entry.username}", )`
+app.get('/viewMatches/:userId', (req, res) => {
+  const replyObj = {};
+  const query = `SELECT distinct ue.eventId as "eventId", u2.name as "matchName"
+      , u2.id as "matchId", u2.bio, u2.picture,
+      ue.eventInfoStr as "eventInfoStr" FROM users u
+        INNER JOIN users_events ue
+          ON u.id = ue.userid
+        INNER JOIN match m
+          ON u.id = m.user1
+        INNER JOIN users u2
+          ON m.user2 = u2.id
+        INNER JOIN match m2
+          ON m.user2 = m2.user1
+        WHERE m.status IS TRUE AND m2.status IS TRUE AND u.id = '${req.url.split('/')[2]}'`;
+  db.query(query)
+    .then((matchData) => {
+      if (!matchData.length) {
+        res.end('No matches');
+      }
+      matchData.forEach((matchesEvent) => {
+        if (replyObj[matchesEvent.matchId]) {
+          replyObj[matchesEvent.matchId].events.push(matchesEvent.eventInfoStr);
+        } else {
+          replyObj[matchesEvent.matchId] = {
+            name: matchesEvent.matchName,
+            picture: matchesEvent.picture,
+            bio: matchesEvent.bio,
+            events: [matchesEvent.eventInfoStr],
+          };
+        }
+      });
+      const keys = Object.keys(replyObj);
+      const reply = [];
+      keys.forEach((key) => {
+        reply.push(replyObj[key]);
+      });
+      res.json(reply);
+    })
+    .catch((err) => {
+      console.log('THIS IS AN ERROR', err);
+    });
+});
 
 app.post('/match', (req, res) => {
   const query = `UPDATE match
@@ -27,7 +67,7 @@ app.post('/match', (req, res) => {
 app.get('/event/:eventId/:userId', (req, res) => {
   reqArr = req.url.split('/');
   const query = `SELECT * FROM users_events
-  WHERE userId = ${reqArr[3]} AND eventId = '${reqArr[2]}'`
+  WHERE userId = ${reqArr[3]} AND eventId = '${reqArr[2]}'`;
   db.query(query)
     .then((eventData) => {
       if (eventData.length) {
@@ -194,7 +234,7 @@ function initialDBPopulation() {
   });
 }
 
-db.query('select * from users_events')// temporary to populate database
+db.query('select * from users_events') // temporary to populate database need to run server twice to properly populate
   .then((data) => {
     if (data.length >= 124) {
       data.forEach((userevent) => {
@@ -202,7 +242,6 @@ db.query('select * from users_events')// temporary to populate database
       });
     }
   });
-// select distinct user2 from match where user1 = 1
 
 db.query('select * from users')
   .then((data) => {
