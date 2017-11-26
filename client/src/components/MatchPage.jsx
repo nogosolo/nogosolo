@@ -28,8 +28,6 @@ class MatchPage extends React.Component {
   }
 
   clickHandler(event) {
-    console.log(this.state.matchId);
-    console.log(event.target.id)
     $.ajax({
       type: 'POST',
       url: '/match',
@@ -52,9 +50,11 @@ class MatchPage extends React.Component {
         <button id={1} onClick={this.clickHandler}>Match</button>
         <button id={0} onClick={this.clickHandler}>No Match</button>
         Name: <li>{this.state.name}</li>
-        Event: <li>{this.state.event}</li>
         Bio: <li>{this.state.bio}</li>
-        Events: <li>{JSON.stringify(this.state.events)}</li>
+        Events:
+        <ul>
+          {this.state.events.map(event => (<li>{event}</li>))}
+        </ul>
       </div>
     );
   }
