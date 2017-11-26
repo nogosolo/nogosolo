@@ -12,7 +12,8 @@
     "server-dev": "nodemon server/index.js",
     "lint": "eslint . --ext .jsx,.js",
     "post": "pg_ctl -D /usr/local/var/postgres start",
-    "initdb": "psql postgres -U nogosolo < database/schema.sql"
+    "initdb": "psql postgres -U nogosolo < database/schema.sql",
+    "test-db": "mocha --bail --reporter nyan spec/dbtests.js; pkill -n node;"
   },
   "pre-commit": [
     "lint"
@@ -29,8 +30,10 @@
   "homepage": "https://github.com/nogosolo/nogosolo#readme",
   "dependencies": {
     "body-parser": "^1.18.2",
+    "chai": "^4.1.2",
     "express": "^4.16.2",
     "jquery": "^3.2.1",
+    "mocha": "^4.0.1",
     "pg-promise": "^7.3.1",
     "react": "^16.1.1",
     "react-click-outside": "^3.0.0",

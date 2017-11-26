@@ -26,7 +26,7 @@ app.post('/match', (req, res) => {
 
 app.get('/event/:eventId/:userId', (req, res) => {
   reqArr = req.url.split('/');
-  const query = `SELECT * FROM user_event
+  const query = `SELECT * FROM users_events
   WHERE userId = ${reqArr[3]} AND eventId = '${reqArr[2]}'`
   db.query(query)
     .then((eventData) => {
@@ -45,7 +45,7 @@ app.get('/match/:userId', (req, res) => {
   const reply = {};
   const query = `SELECT distinct u.id, u2.name as "matchName"
   , u2.id as "matchId", u2.bio, u2.picture FROM users u
-    INNER JOIN user_event ue
+    INNER JOIN users_events ue
       ON u.id = ue.userid
     INNER JOIN match m
       ON u.id = m.user1
@@ -63,7 +63,7 @@ app.get('/match/:userId', (req, res) => {
       reply.picture = matchData[0].picture;
       reply.matchId = matchData[0].matchId;
       reply.events = [];
-      db.query(`SELECT eventInfoStr as "eventInfoStr" from user_event
+      db.query(`SELECT eventInfoStr as "eventInfoStr" from users_events
         WHERE userId = ${matchData[0].matchId}`)
         .then((events) => {
           for (let i = 0; i < events.length; i += 1) {
@@ -131,7 +131,7 @@ app.post('/login', (req, res) => {
 });
 
 app.post('/event', (req, res) => {
-  db.query(`INSERT INTO user_event (userId, eventId, eventInfoStr)
+  db.query(`INSERT INTO users_events (userId, eventId, eventInfoStr)
   VALUES (${req.body.userId}, '${req.body.eventId}', '${req.body.eventInfoStr}')`)
     .then(() => {
       console.log(`userID:${req.body.userId} and eventID: ${req.body.eventId} was successfully added to the DB`);
@@ -144,7 +144,7 @@ app.post('/event', (req, res) => {
 });
 
 function addPotentialMatchInit(userid, eventid) { // temporary to populate database
-  db.query(`SELECT * FROM user_event
+  db.query(`SELECT * FROM users_events
     WHERE eventId = '${eventid}' AND NOT userId = ${userid}`)
     .then((data) => {
       data.forEach((entry) => {
@@ -178,7 +178,7 @@ function initialDBPopulation() {
           .then((data) => {
             entry.events.forEach((event) => {
               const eventStr = `${event}d`;
-              const queryStr = `INSERT INTO user_event (userid, eventid, eventInfoStr)
+              const queryStr = `INSERT INTO users_events (userid, eventid, eventInfoStr)
               VALUES (${data[0].id}, '${eventStr}', '${eventStr}')`;
               db.query(queryStr)
                 .then(() => {
@@ -194,7 +194,7 @@ function initialDBPopulation() {
   });
 }
 
-db.query('select * from user_event')// temporary to populate database
+db.query('select * from users_events')// temporary to populate database
   .then((data) => {
     if (data.length >= 124) {
       data.forEach((userevent) => {
