@@ -1,7 +1,7 @@
 const { db } = require('../database/index.js');
 
 function addPotentialMatchs(userid, eventid) { // Will be used within the event post request on server
-  db.query(`SELECT * FROM user_event
+  db.query(`SELECT * FROM users_events
     WHERE eventId = '${eventid}' AND NOT userId = ${userid}`)
     .then((data) => {
       data.forEach((entry) => {

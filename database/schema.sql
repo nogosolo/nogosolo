@@ -17,7 +17,7 @@ CREATE TABLE users (
   PRIMARY KEY (id)
 );
 
-CREATE TABLE user_event (
+CREATE TABLE users_events (
   id SERIAL,
   userId INTEGER NOT NULL,
   eventId VARCHAR(255) NOT NULL,
@@ -33,7 +33,7 @@ CREATE TABLE match (
   PRIMARY KEY (id)
 );
 
-ALTER TABLE user_event ADD FOREIGN KEY (userId) REFERENCES users (id);
+ALTER TABLE users_events ADD FOREIGN KEY (userId) REFERENCES users (id);
 ALTER TABLE match ADD FOREIGN KEY (user1) REFERENCES users (id);
 ALTER TABLE match ADD FOREIGN KEY (user2) REFERENCES users (id);
 
