@@ -13,13 +13,15 @@ class EventPage extends React.Component {
 
 
   componentDidMount() {
-    $.ajax({
-      type: 'GET',
-      url: `/event/${this.props.event.id}/${this.props.userId}`,
-      success: (resp) => {
-        this.setState({ attending: resp });
-      },
-    });
+    if (this.props.userId.length) {
+      $.ajax({
+        type: 'GET',
+        url: `/event/${this.props.event.id}/${this.props.userId}`,
+        success: (resp) => {
+          this.setState({ attending: resp });
+        },
+      });
+    }
   }
 
   clickHandler(event) {
@@ -48,8 +50,15 @@ class EventPage extends React.Component {
         <li>{this.props.event._embedded.venues['0'].city.name}</li>
         <li>{this.props.event._embedded.venues['0'].country.countryCode}</li>
         <img src={this.props.event.images['8'].url} alt="not found" />
-        {!this.state.attending && (<button onClick={this.clickHandler}>Click to Attending</button>)}
-        {this.state.attending && (<button disabled >Attending</button>)}
+        {this.props.userId.length && !this.state.attending && (
+          <button onClick={this.clickHandler}>Click to Attending</button>
+        )}
+        {this.props.userId.length && this.state.attending && (
+          <button disabled >Attending</button>
+        )}
+        {!this.props.userId.length && (
+          <button disabled >Create an Account to Add an Event!</button>
+        )}
       </div>
     );
   }
