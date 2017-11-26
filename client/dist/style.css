@@ -61,14 +61,37 @@ img.avatar {
     background-color: #3665f4;
 }
 
-.bar {
-  background-color: #00008B;
+.searchbar {
+  flex: 2;
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
 }
 
-.loginbutton {
-  float: right;
-  width: 50px;
+.topnav {
+    background-color: #3498DB;
+    overflow: hidden;
 }
-.signupbutton {
-  float: right;
+
+/* Style the links inside the navigation bar */
+.topnav a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    font-family: "Verdana";
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+/* Add a color to the active/current link */
+.topnav a.active {
+    background-color: #4CAF50;
+    color: white;
 }
