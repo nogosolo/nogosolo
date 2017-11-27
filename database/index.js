@@ -16,7 +16,8 @@ const configObj = {
   user: 'nogosolo',
 };
 
-const db = pgp(configObj);
+// const db = pgp(configObj);
+const db = pgp('postgres://cedotswtswlqwc:872eac90602986a85a4354cc997a215d03f440fe0e182d54974baf45235afe0e@ec2-54-221-204-213.compute-1.amazonaws.com:5432/df9fa4ea5rcere');
 // const conString = 'postgres://nogosolo@localhost:8080/nogosolo';
 
 // const client = new pg.Client(conString);
