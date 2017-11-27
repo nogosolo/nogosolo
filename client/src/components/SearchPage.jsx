@@ -50,7 +50,7 @@ class Search extends React.Component {
             {this.state.results.map((event, index) => {
               if (event._embedded.venues["0"] && event._embedded.venues["0"].address && event._embedded.venues["0"].address.line1 &&
               event.name && event.dates.start.localDate && event._embedded.venues["0"].city &&
-              event._embedded.venues["0"].city.name && event._embedded.venues["0"].country.countryCode && event.images['9'].url) {
+              event._embedded.venues["0"].city.name && event._embedded.venues["0"].country.countryCode && event.images['8'].url) {
               const eventStr = `${event.name} on ${event.dates.start.localDate}
                at ${event._embedded.venues["0"].address.line1}
                , ${event._embedded.venues["0"].city.name}
