@@ -11,8 +11,7 @@ NoGoSolo is an app that connects event goers so they never have to go alone.  It
   React and React Router: NoGoSolo is built using the React framework.  React router allows us to simulate a multipage app within a single page app.  Learn more about react here: https://reactjs.org/docs/hello-world.html.
 
 ## API:
-  We use the ticketmaster api.  Documentation can be found here: https://developer.ticketmaster.com/products-and-docs/
-  apis/discovery-api/v2/.
+  We use the ticketmaster api.  Documentation can be found here: https://developer.ticketmaster.com/products-and-docs/apis/discovery-api/v2/.
 
 ## Getting Started
 
