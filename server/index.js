@@ -223,16 +223,16 @@ function initialDBPopulation() {
               db.query(queryStr)
                 .then(() => {
                   console.log(`${entry.name} going to event: ${event} added to DB`);
-                 });
-             });
-           });
-         console.log(`${entry.name} with username ${entry.username} was successfully added to the DB`);
-       })
-       .catch((err) => {
-         console.log('THIS IS AN ERROR', err);
-       });
-   });
- }
+                });
+            });
+          });
+        console.log(`${entry.name} with username ${entry.username} was successfully added to the DB`);
+      })
+      .catch((err) => {
+        console.log('THIS IS AN ERROR', err);
+      });
+  });
+}
 
 db.query('select * from users_events') // temporary to populate database need to run server twice to properly populate
   .then((data) => {
@@ -241,7 +241,8 @@ db.query('select * from users_events') // temporary to populate database need to
         addPotentialMatchInit(userevent.userid, userevent.eventid);
       });
     }
-  });
+});
+
 
 // db.query('select * from users')
 //   .then((data) => {
