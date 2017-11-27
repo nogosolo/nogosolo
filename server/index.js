@@ -261,3 +261,5 @@ const host = '0.0.0.0';
 app.listen(process.env.PORT || 8080, host, () => {
   console.log('listening on port 8080');
 });
+
+module.exports.seed = initialDBPopulation;
