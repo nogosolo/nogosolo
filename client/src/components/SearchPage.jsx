@@ -48,6 +48,9 @@ class Search extends React.Component {
             <h3>Search Results for: {this.state.keyword} </h3>
             There Are {this.state.results.length} event results.
             {this.state.results.map((event, index) => {
+              if (event._embedded.venues["0"] && event._embedded.venues["0"].address && event._embedded.venues["0"].address.line1 &&
+              event.name && event.dates.start.localDate && event._embedded.venues["0"].city &&
+              event._embedded.venues["0"].city.name && event._embedded.venues["0"].country.countryCode && event.images['8'].url) {
               const eventStr = `${event.name} on ${event.dates.start.localDate}
                at ${event._embedded.venues["0"].address.line1}
                , ${event._embedded.venues["0"].city.name}
@@ -56,7 +59,7 @@ class Search extends React.Component {
                 <Link id={index} onClick={this.clickHandler} to="/event">
                 {eventStr}
                 </Link>
-              </li>; })}
+              </li>; }})}
           </div>
       );
     }
