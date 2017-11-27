@@ -234,12 +234,17 @@ function initialDBPopulation() {
   });
 }
 
-db.query('select * from users_events') // temporary to populate database need to run server twice to properly populate
-  .then((data) => {
-    if (data.length >= 1) {
-      data.forEach((userevent) => {
-        addPotentialMatchInit(userevent.userid, userevent.eventid);
-      });
+db.query('select * from match')
+  .then((result) => {
+    if (!result.length) {
+      db.query('select * from users_events') // temporary to populate database need to run server twice to properly populate
+        .then((data) => {
+          if (data.length >= 1) {
+            data.forEach((userevent) => {
+              addPotentialMatchInit(userevent.userid, userevent.eventid);
+            });
+          }
+        });
     }
 });
 
