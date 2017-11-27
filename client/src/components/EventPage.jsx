@@ -26,7 +26,7 @@ class EventPage extends React.Component {
 
   clickHandler(event) {
     let eventStr = `${this.props.event.name} on ${this.props.event.dates.start.localDate}`;
-    eventStr += `at ${this.props.event._embedded.venues['0'].name}`;
+    eventStr += ` at ${this.props.event._embedded.venues['0'].name}`;
     $.ajax({
       type: 'POST',
       url: '/event',
