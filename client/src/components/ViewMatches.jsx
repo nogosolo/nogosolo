@@ -16,9 +16,11 @@ class ViewMatches extends React.Component {
       type: 'GET',
       url: `/viewMatches/${this.props.userId}`,
       success: (resp) => {
-        this.setState({
-          matches: resp,
-        });
+        if (resp !== 'No matches') {
+          this.setState({
+            matches: resp,
+          });
+        }
       },
     });
   }
@@ -42,7 +44,7 @@ class ViewMatches extends React.Component {
     return (
       <div>
         <ul>
-          {this.state.matches.map(match => (
+          {this.state.matches.length !== 0 && (this.state.matches.map(match => (
             <li className="post-list-entry">
               <div className="post-list-entry-title">{match.name}</div>
               <div className="post-list-entry-byline">{match.bio}</div>
@@ -50,7 +52,12 @@ class ViewMatches extends React.Component {
                 Events: {match.events.map(event => (<span> {event} </span>))}
               </div>
             </li>
-            ))}
+          )))}
+          {this.state.matches.length === 0 && (
+            <li className="post-list-entry">
+              <div className="post-list-entry-title"> You do not currently have any matches</div>
+            </li>
+          )}
         </ul>
       </div>
     );
