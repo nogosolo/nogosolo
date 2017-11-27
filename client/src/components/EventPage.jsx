@@ -13,7 +13,7 @@ class EventPage extends React.Component {
 
 
   componentDidMount() {
-    if (this.props.userId.length) {
+    if (this.props.userId) {
       $.ajax({
         type: 'GET',
         url: `/event/${this.props.event.id}/${this.props.userId}`,
@@ -36,7 +36,6 @@ class EventPage extends React.Component {
         eventInfoStr: eventStr,
       },
       success: (resp) => {
-        console.log(resp);
         this.setState({ attending: true });
       },
     });
@@ -51,7 +50,7 @@ class EventPage extends React.Component {
         <li>{this.props.event._embedded.venues['0'].country.countryCode}</li>
         <img src={this.props.event.images['8'].url} alt="not found" />
         {this.props.userId && !this.state.attending && (
-          <button onClick={this.clickHandler}>Click to Attending</button>
+          <button onClick={this.clickHandler}>Click to Attend</button>
         )}
         {this.props.userId && this.state.attending && (
           <button disabled >Attending</button>
