@@ -2,8 +2,6 @@
 
 NoGoSolo is an app that connects event goers so they never have to go alone.  It mixes ticketmaster search with sophisticated matching algorithms to connect event goers. 
 
----
-
 ## Dependencies:
 
   postgresql: We are using postgresql because we have relational data and need a sql compliant database.  We chose postgresql over mysql because postgresql is ACID compliant and supports complex queries better than mysql does.  Read more about postgresql here: https://www.postgresql.org/.  
@@ -16,11 +14,9 @@ NoGoSolo is an app that connects event goers so they never have to go alone.  It
   We use the ticketmaster api.  Documentation can be found here: https://developer.ticketmaster.com/products-and-docs/
   apis/discovery-api/v2/.
 
----
-
 ## Getting Started
 
-**Setup:**
+### Setup:
 
 - [ ] In your terminal, navigate to the `nogosolo` directory and run `npm install` to install dependencies.
 - [ ] Install postgresql by running `brew install postgresql`
