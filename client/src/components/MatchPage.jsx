@@ -49,7 +49,7 @@ class MatchPage extends React.Component {
   render() {
     return (
       <div className="slideshow-container">
-        {this.state.name.length && (
+        {this.state.name.length !== 0 && (
           <div className="mySlides">
             <img
               className="matchimg"
@@ -67,7 +67,7 @@ class MatchPage extends React.Component {
             <b>Events:</b> {this.state.events.map(event => (<li>{event}</li>))}
           </div>
       )}
-        {!this.state.name.length && (
+        {this.state.name.length === 0 && (
           <div>No New Possible Matches</div>
         )}
       </div>

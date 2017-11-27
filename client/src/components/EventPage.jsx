@@ -49,13 +49,13 @@ class EventPage extends React.Component {
         <li>{this.props.event._embedded.venues['0'].city.name}</li>
         <li>{this.props.event._embedded.venues['0'].country.countryCode}</li>
         <img src={this.props.event.images['8'].url} alt="not found" />
-        {this.props.userId && !this.state.attending && (
+        {this.props.userId !== 0 && !this.state.attending && (
           <button onClick={this.clickHandler}>Click to Attend</button>
         )}
-        {this.props.userId && this.state.attending && (
+        {this.props.userId !== 0 && this.state.attending && (
           <button disabled >Attending</button>
         )}
-        {!this.props.userId && (
+        {this.props.userId ===0 && (
           <button disabled >Create an Account to Add an Event!</button>
         )}
       </div>
