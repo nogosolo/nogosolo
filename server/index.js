@@ -208,47 +208,47 @@ function addPotentialMatchInit(userid, eventid) { // temporary to populate datab
       console.log('THIS IS AN ERROR', err);
     });
 }
-
-function initialDBPopulation() {
-  dummyData.forEach((entry) => {
-    db.query(`INSERT INTO users (name, username, password, bio, picture)
-    VALUES ('${entry.name}', '${entry.username}', '${entry.password}', '${entry.bio}', '${entry.picture}')`)
-      .then(() => {
-        db.query(`SELECT id FROM users WHERE username = '${entry.username}'`)
-          .then((data) => {
-            entry.events.forEach((event) => {
-              const eventStr = `${event}d`;
-              const queryStr = `INSERT INTO users_events (userid, eventid, eventInfoStr)
-              VALUES (${data[0].id}, '${eventStr}', '${eventStr}')`;
-              db.query(queryStr)
-                .then(() => {
-                  console.log(`${entry.name} going to event: ${event} added to DB`);
-                });
-            });
-          });
-        console.log(`${entry.name} with username ${entry.username} was successfully added to the DB`);
-      })
-      .catch((err) => {
-        console.log('THIS IS AN ERROR', err);
-      });
-  });
-}
+//
+// function initialDBPopulation() {
+//   dummyData.forEach((entry) => {
+//     db.query(`INSERT INTO users (name, username, password, bio, picture)
+//     VALUES ('${entry.name}', '${entry.username}', '${entry.password}', '${entry.bio}', '${entry.picture}')`)
+//       .then(() => {
+//         db.query(`SELECT id FROM users WHERE username = '${entry.username}'`)
+//           .then((data) => {
+//             entry.events.forEach((event) => {
+//               const eventStr = `${event}d`;
+//               const queryStr = `INSERT INTO users_events (userid, eventid, eventInfoStr)
+//               VALUES (${data[0].id}, '${eventStr}', '${eventStr}')`;
+//               db.query(queryStr)
+//                 .then(() => {
+//                   console.log(`${entry.name} going to event: ${event} added to DB`);
+//                 });
+//             });
+//           });
+//         console.log(`${entry.name} with username ${entry.username} was successfully added to the DB`);
+//       })
+//       .catch((err) => {
+//         console.log('THIS IS AN ERROR', err);
+//       });
+//   });
+// }
 
 db.query('select * from users_events') // temporary to populate database need to run server twice to properly populate
   .then((data) => {
-    if (data.length >= 124) {
+    if (data.length >= 1) {
       data.forEach((userevent) => {
         addPotentialMatchInit(userevent.userid, userevent.eventid);
       });
     }
   });
 
-db.query('select * from users')
-  .then((data) => {
-    if (!data.length) {
-      initialDBPopulation();
-    }
-  });
+// db.query('select * from users')
+//   .then((data) => {
+//     if (!data.length) {
+//       initialDBPopulation();
+//     }
+//   });
 
 const host = '0.0.0.0';
 

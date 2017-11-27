@@ -48,7 +48,7 @@ class EventPage extends React.Component {
         <li>{this.props.event._embedded.venues['0'].address.line1}</li>
         <li>{this.props.event._embedded.venues['0'].city.name}</li>
         <li>{this.props.event._embedded.venues['0'].country.countryCode}</li>
-        <img src={this.props.event.images['8'].url} alt="not found" />
+        <img src={this.props.event.images['9'].url} alt="not found" />
         {this.props.userId !== 0 && !this.state.attending && (
           <button onClick={this.clickHandler}>Click to Attend</button>
         )}
