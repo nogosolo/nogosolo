@@ -2,6 +2,11 @@ const { db } = require('../database/index.js');
 const { expect } = require('chai');
 const { setup, addUsers } = require('./setupdbfortests.js');
 const { seed } = require('../server/index.js');
+
+/* test set up:
+tried a before each to setup database in order to query, but not working
+*/
+
 // const app = require('../server/index.js');
 // const schema = require('../database/schema.sql');
 // const port = 8080;
@@ -78,6 +83,15 @@ describe('Database Schema:', () => {
         console.log('there is a problem in the match table', err);
       });
   });
+
+  
+/*
+The following two tests were partially working but did not work together.  Running the test file multiple times
+inserts multiple entries which breaks the test and necessitates clearing the database.  We tried to clear above in the
+before each but could not get that to work and we also tried to do it in the following tests but it wasn't working
+*/
+
+
   // it('should be able to add new users to users table', (done) => {
   //   let queryString = `INSERT INTO users (name, username, password, bio, picture) VALUES ('Eugene Soo', 'eugene', 'singapore', 'What are you working on now?', 'https://media.licdn.com/mpr/mpr/shrinknp_200_200/p/8/005/064/23a/20b00c9.jpg')`;
   //   db.query(queryString)

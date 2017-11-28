@@ -1,7 +1,11 @@
+/*
+these queries are exported to be used in tests
+*/
 
+// clear the database
 const setupString = 'DROP TABLE if exists match; DROP TABLE if exists users_events; DROP TABLE if exists users; CREATE TABLE users (id SERIAL, name VARCHAR(25) NULL DEFAULT NULL, username VARCHAR(25) NULL DEFAULT NULL, password VARCHAR(25) NULL DEFAULT NULL, bio VARCHAR(255) NULL DEFAULT NULL, picture VARCHAR(255) NULL DEFAULT NULL, PRIMARY KEY (id)); CREATE TABLE users_events (id SERIAL, userId INTEGER NOT NULL, eventId VARCHAR(255) NOT NULL, eventInfoStr VARCHAR(255) NULL DEFAULT NULL, -- date TIMESTAMP NULL DEFAULT NULL, PRIMARY KEY (id)); CREATE TABLE match (id SERIAL, user1 INTEGER NOT NULL, user2 INTEGER NOT NULL, status BOOLEAN DEFAULT NULL, PRIMARY KEY (id)); ALTER TABLE users_events ADD FOREIGN KEY (userId) REFERENCES users (id); ALTER TABLE match ADD FOREIGN KEY (user1) REFERENCES users (id); ALTER TABLE match ADD FOREIGN KEY (user2) REFERENCES users (id);';
 
-
+// re seed the user table
 const addUsers = `INSERT INTO users (id, name, username, password, bio, picture) VALUES (1, 'Allen Price', 'hackerpirate', 'hackreactor', 'I am the leader of a band of puny giraffe pirates and I code on the side.', 'https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAKuAAAAJDQxMDgwYWYwLTdjZmEtNDkwMy04NDAzLTU0MDQ2N2I1YTA4ZA.jpg');
 INSERT INTO users (id, name, username, password, bio, picture) VALUES (2, 'Beth Johnson', 'theBeth', 'bethcoin', 'I like hugs.  I LUV hugs.  Please hug me', 'https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAKuAAAAJDQxMDgwYWYwLTdjZmEtNDkwMy04NDAzLTU0MDQ2N2I1YTA4ZA.jpg');
 INSERT INTO users (id, name, username, password, bio, picture) VALUES (3, 'Doug Calhoun', 'hacker1', 'hackreactor', 'Come to office hours and hang out with me', 'https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAKuAAAAJDQxMDgwYWYwLTdjZmEtNDkwMy04NDAzLTU0MDQ2N2I1YTA4ZA.jpg');
