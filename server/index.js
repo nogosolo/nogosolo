@@ -234,30 +234,11 @@ function initialDBPopulation() {
   });
 }
 
-// db.query('select * from match')
-//   .then((result) => {
-//     if (!result.length) {
-//       db.query('select * from users_events') // temporary to populate database need to run server twice to properly populate
-//         .then((data) => {
-//           if (data.length >= 1) {
-//             data.forEach((userevent) => {
-//               addPotentialMatchInit(userevent.userid, userevent.eventid);
-//             });
-//           }
-//         });
-//     }
-// });
+//  this is for heroku
+//  const host = '0.0.0.0';
 
-
-// db.query('select * from users')
-//   .then((data) => {
-//     if (!data.length) {
-//       initialDBPopulation();
-//     }
-//   });
-
-const host = '0.0.0.0';
-
-app.listen(process.env.PORT || 8080, host, () => {
+app.listen(process.env.PORT || 8080, () => {
   console.log('listening on port 8080');
 });
+
+module.exports.seed = initialDBPopulation;

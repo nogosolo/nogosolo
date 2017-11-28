@@ -19,7 +19,7 @@ CREATE TABLE users (
 
 CREATE TABLE users_events (
   id SERIAL,
-  userId INTEGER NOT NULL,
+  userId INTEGER NOT NULL REFERENCES users(id),
   eventId VARCHAR(255) NOT NULL,
   eventInfoStr VARCHAR(255) NULL DEFAULT NULL,
   -- date TIMESTAMP NULL DEFAULT NULL,
@@ -28,16 +28,18 @@ CREATE TABLE users_events (
 
 CREATE TABLE match (
   id SERIAL,
-  user1 INTEGER NOT NULL,
-  user2 INTEGER NOT NULL,
+  user1 INTEGER NOT NULL REFERENCES users(id),
+  user2 INTEGER NOT NULL REFERENCES users(id),
   status BOOLEAN DEFAULT NULL,
   PRIMARY KEY (id)
 );
 
-ALTER TABLE users_events ADD FOREIGN KEY (userId) REFERENCES users (id);
-ALTER TABLE match ADD FOREIGN KEY (user1) REFERENCES users (id);
-ALTER TABLE match ADD FOREIGN KEY (user2) REFERENCES users (id);
--- pg_dump --table=match --data-only --column-inserts nogosolo > data.sql
+
+-- ALTER TABLE users_events ADD FOREIGN KEY (userId) REFERENCES users (id);
+-- ALTER TABLE match ADD FOREIGN KEY (user1) REFERENCES users (id);
+-- ALTER TABLE match ADD FOREIGN KEY (user2) REFERENCES users (id);
+-- pg_dump --table=users --data-only --column-inserts nogosolo > data.sql
+
 
 
 

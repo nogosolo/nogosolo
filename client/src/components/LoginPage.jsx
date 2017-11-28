@@ -28,7 +28,6 @@ class LoginPage extends React.Component {
       method: 'POST',
       success: (data) => {
         if (data) {
-          console.log('sign in', data);
           data = JSON.parse(data);
           context.props.setUser(data);
 
@@ -42,13 +41,8 @@ class LoginPage extends React.Component {
       }
 
     })
-    //  const currentState = this.state.active;
-    //  this.setState({ active: !currentState });
   }
 
-  // handleSignin() {
-  //   console.log(this.state.username)
-  // }
 
   changeHandler(event) {
     this.setState({
